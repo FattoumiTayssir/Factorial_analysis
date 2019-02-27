@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1543689756360.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "68B57D38",
+    "lastKnownWriteTime" : 3419473789575321445,
+    "last_content_update" : 1543689756360,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "A98E57EF",
+        "caption" : "decathlon",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=decathlon&cache_key=A98E57EF",
+        "displayedObservations" : "41",
+        "environment" : "",
+        "object" : "decathlon",
+        "preview" : "0",
+        "totalObservations" : "41",
+        "variables" : "13"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

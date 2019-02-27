@@ -1,0 +1,171 @@
+---
+title: "Atelier 1"
+author: "Aicha Ferchichi"
+date: "1 décembre 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Jeu de données : Decathlon
+
+### 1-
+
+```{r}
+library(FactoMineR)
+data(decathlon)
+head(decathlon)
+```
+### 2-
+```{r}
+str(decathlon)
+```  
+#### Interpretation  
+
+C'est un dataset qui contient 41 observations et 13 colonnes
+il ya 12 variables quantitatives(les résultats pour les 10 preuves,le classement de l'athléte et le nombre total de points gagnés) avec une variable qualitative qui correspond au nom de la compétition dans laquelle l'athléte a participé.  
+
+### 3-
+```{r}
+
+library(plyr)
+?ddply
+ddply(decathlon,.(decathlon$Competition,decathlon$Points))
+```
+
+### 4-
+
+```{r}
+cor(decathlon[0:12])
+#install.packages("corrgram")
+library(corrgram)
+corrgram(decathlon[,0:12], order=TRUE,
+         main="Corrgram Decathlon",
+         lower.panel=panel.shade, upper.panel=panel.pie,
+         diag.panel=panel.minmax, text.panel=panel.txt)
+```
+
+#### Interpretation   
+
+Les valeurs positives sont représentés par la couleur bleu et ceux qui sont négatives par la couleur rouge.
+On peut conclure à partir du corrgram que Long.jump et points représente les variables les plus corréles et les moins corréles sont Points et Rank.
+
+### 5-
+
+Lorsque les unités de mesure diffèrent d'une variable à l'autre on doit faire une standardisation.  
+
+### 5.1-
+
+```{r}
+res.pca=PCA(decathlon,quanti.sup = 11:12,quali.sup = 13)
+
+```
+
+### 5.2-  
+
+Le but de l ACP dans cet exercice est d'obtenir une typologie de la performance des profils donc les profils des athlétes en fonction de leur performance, on remarque trés bien que les variables 'rank' et 'points'n'appartiennent pas aux profils d'athlètes et elles sont une conclusion tirés par les resultats des 10 preuves donc on peut les considérer comme des variables supplémentaire qu'on va les utiliser aprés au niveau de l'interprétation des dimensions.  
+
+### 5.3-  
+
+
+```{r}
+res.pca=PCA(decathlon,quanti.sup = 11:12,quali.sup = 13)
+res.pca$eig
+```
+  
+  
+Les deux premiers axes (composantes principales) exprime environs 50.090% de l'inertie total en d'autres termes 50.090% de la variabilités total du nuage des individus ou des variables est représenté par le 1er plan factoriel.  
+
+### 5.4-  
+
+
+```{r}
+barplot(res.pca$eig[,2])
+```
+
+### 5.5-
+
+```{r}
+res.pca$ind$coord
+res.pca$ind$cos2
+res.pca$ind$contrib
+```
+
+### 5.6-
+
+```{r}
+res.pca$quali.sup$coord
+res.pca$quali.sup$cos2
+res.pca$quanti.sup$coord
+res.pca$quanti.sup$cos2
+```
+
+### 5.7-
+
+```{r}
+plot(res.pca,choix ="ind" , axes=3:4)
+
+```
+
+### 5.8-
+
+```{r}
+plot.PCA(res.pca,choix="ind",habillage=13)
+
+```
+
+### 5.9-
+
+```{r}
+plotellipses(res.pca,keepvar=c("Competition"))
+```
+
+### Interpretation
+
+On peut remarquer que les différentes modalités de la variable illustrative sont quasiment similaires.
+
+### 5.10-
+
+```{r}
+library(ade4)
+biplot(dudi.pca(decathlon[,0:12],nf=2,scale = T ,scannf = F))
+
+```
+  
+### Aller plus loin
+
+###1-
+
+```{r}
+library(factoextra)
+fviz_pca(res.pca)
+fviz_eig(res.pca)
+
+```
+
+### Interpretation
+
+On remarque que factoExtra est plus détaillé et méme il existe plusieurs options sur les différentes représentations des plots du PCA.
+
+###2-
+
+```{r}
+library(pca3d)
+respca = prcomp(decathlon[, 1:10], scale = TRUE)
+pca3d(respca)
+
+```
+
+###3-
+
+```{r}
+library(psych)
+principal(decathlon[,1:10],rotate = "varimax",nfactors = 5)
+```
+
+
+
+
+

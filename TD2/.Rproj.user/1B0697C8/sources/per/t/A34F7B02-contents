@@ -1,0 +1,119 @@
+library("FactoMineR")
+
+dataTemp=read.csv(file = file.choose(),sep = ";",dec =".",row.names = 1,header = TRUE)
+dataTemp
+str(dataTemp)
+summary(dataTemp)
+?PCA
+res.pca=PCA(ind.sup = 24:35,quanti.sup =13:16,quali.sup = 17,X =dataTemp )
+res.pca
+?plot
+#choix pour restreindre ? un seule sh?ma de pca , invisible pour cacher 
+plot.PCA(res.pca,habillage = 17,choix = "ind",invisible = "ind.sup")
+
+res.pca$ind$cos2
+
+res.pca$var$contrib
+
+#6 description dimensions pca 
+dimdesc(res.pca)
+"dimdesc(res.pca)
+$`Dim.1`
+$`Dim.1`$`quanti`
+correlation      p.value
+Annual      0.9975483 9.575809e-26
+October     0.9916246 3.734359e-20
+September   0.9856254 1.056964e-17
+April       0.9738876 5.295583e-15
+November    0.9523567 2.659701e-12
+March       0.9450521 1.151422e-11
+August      0.9092443 1.904695e-09
+February    0.8842848 2.180620e-08
+December    0.8731191 5.450923e-08
+May         0.8698517 7.013036e-08
+July        0.8441626 4.129012e-07
+January     0.8424506 4.594275e-07
+June        0.8333141 7.957991e-07
+Latitude   -0.9099106 1.768178e-09
+
+$`Dim.1`$quali
+R2      p.value
+Area 0.6787608 6.282082e-05
+
+$`Dim.1`$category
+Estimate      p.value
+South  4.182744 2.359137e-05
+North -2.822709 1.241529e-02
+
+
+$Dim.2
+$Dim.2$`quanti`
+correlation      p.value
+Amplitude   0.9444140 1.296159e-11
+Longitude   0.6449726 8.912273e-04
+June        0.5453220 7.119942e-03
+July        0.5086619 1.319151e-02
+May         0.4578116 2.804268e-02
+February   -0.4558325 2.881655e-02
+December   -0.4728656 2.268397e-02
+January    -0.5313576 9.076631e-03
+
+$Dim.2$quali
+R2     p.value
+Area 0.5461533 0.001525752
+
+$Dim.2$category
+Estimate      p.value
+East   1.4622991 0.0004492948
+North -0.9063514 0.0201613275
+
+
+$Dim.3
+$Dim.3$`quali`
+R2    p.value
+Area 0.3936374 0.02091359
+
+$Dim.3$category
+Estimate    p.value
+North  0.2779913 0.01510325
+East  -0.2478747 0.02080116
+
+"
+
+#7 
+res.pca$eig
+
+#8
+res.pca$ind
+#9 les contibutions ne seront pas affich? (contibution=variable qui sont affect? au pca)
+res.pca$ind.sup
+#10
+sort(round(res.pca$ind$contrib[,1],1))
+#11
+sort(round(res.pca$ind$contrib[,2],1))
+#12,13
+sort(round(res.pca$ind$cos2[,1]+res.pca$ind$cos2[,2],3))
+#14
+res.pca$var
+#15
+
+sort(res.pca$var$cor[,1])
+
+sort(res.pca$var$cor[,2])
+#16
+res.pca$quanti.sup
+#17
+res.pca$quali.sup
+#18
+scaled1=scale(dataTemp[1:23,1,16])
+scaled1
+#19
+cor(dataTemp[,1:16])
+#20
+
+"variance expliqu?"
+"la 1er comp principal car emlle reume pou r elle seule 89% de l'inertie total"
+"variable factor map (cercle) toutr"
+
+#21 
+"analyse conjointe"

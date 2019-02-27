@@ -1,0 +1,58 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Including Plots
+1-2-3-4) voir cours
+5)
+```{r}
+ baseC=read.csv("femme_travail.csv",sep = ";",row.names = 1,header = T)
+  baseC
+```
+6)
+```{r}
+summary(baseC)
+```
+7)
+Ho:indepandance
+H1:depandance(grand-ecart thorique et pratique)
+```{r}
+resultat=chisq.test(baseC[,1:3])
+resultat
+```
+8)
+```{r}
+round(resultat$expected,2)
+```
+9)
+```{r}
+library("FactoMineR")
+res=CA(baseC[,1:3])
+```
+10)
+Le premier axe represent 86.3% de la liaison entre les 2 va c.a.d la quasi totalité de l'ecart
+entre le tableau de donnes observée et le modéle d'indépendance
+```{r}
+res$eig
+barplot(res$eig)
+```
+L'origine du plan fact est confondue avec le profil moyen de chaqun des 2 nuage
+12-13)
+```{r}
+plot.CA(res,invisible = "row")
+```
+Interpretation: le 1er axe presente l'attitude vers le travail feminin il range les modalites de la seconde variables depuis la plus defavorable jusqu' au plus favorble
+```{r}
+res$col
+```
+
+Analyse conjointe
+```{r}
+plot.CA(res)
+
+```
+interpretation il se repousse par rapport 

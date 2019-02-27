@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1543689127409.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3301312496",
+    "id" : "ECEA226C",
+    "lastKnownWriteTime" : 1542123607,
+    "last_content_update" : 1542123607,
+    "path" : "C:/Users/lenovo/Desktop/4-DS-2/Analyse F/TP2/tp2.R",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "49,21",
+        "scrollLine" : "23"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

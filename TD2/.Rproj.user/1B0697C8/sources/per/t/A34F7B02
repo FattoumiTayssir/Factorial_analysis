@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1546601718402.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3315859858",
+    "id" : "A34F7B02",
+    "lastKnownWriteTime" : 1542221823,
+    "last_content_update" : 1542221823,
+    "path" : "C:/Users/tay/Desktop/MTR/analyse fact/TP2.R",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "85,0",
+        "scrollLine" : "82"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

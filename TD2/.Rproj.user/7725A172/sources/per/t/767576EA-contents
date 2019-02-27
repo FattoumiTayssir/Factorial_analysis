@@ -1,0 +1,39 @@
+
+db=read.table(file=file.choose(),header=T,sep=";",dec=".",na.string="",row.names=1)
+db
+
+library("FactoMineR")
+// ensemble : repr?sente la tranche d'age moyenne en france 
+3/
+tranche d'age en fct des diff rubriques -> typologie suivant l'age // variable age : active 
+les variables qui d?crives les rubriques de conso supp
+ensemple =variable supp car qu'il a une redonance d'informat 
+res.pca=PCA(db,ind.sup=8:18,quanti.sup=27:30) // ici ensemple 
+res.pca$eig
+
+casure :17/10-> 1
+comm:
+pour obtenir une typologie des classes d'age fond? sur leur d?pense on d?finie la distance entre deux classes d'age 
+uniquement sur la base de la base de leur d?pense dans les diff?rentes rubriques ainsi les autres rubriques qui correspondent
+? des totaux ne sont pas des variables actives mais supp
+4/
+5/
+les deux premiers axes exprimes environs 93% de l'inertie total en d'autres termes 93% de la variabilit?s total du nuage des individus
+ou des variables est repr?sent? par le 1er plan factoriel
+6/
+barplot(res.pca$eig[,1],col=2)
+-> on prend les 2 premiers axes 
+la 1er colone de la sortie eig 
+7/ 
+plot.PCA(res.pca,choix="ind",invisible="ind.sup")
+par rapport au 1er axe
+oppose les tranches d'age extreme  au tranche  moyenne 
+
+la 2eme composante : organisationdes tranches d'age
+**l'axe 2 range les tranche d'ages de la plus haut ? la plus basse
+c/
+plot.PCA(res.pca,choix="ind")
+
+
+
+

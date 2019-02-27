@@ -1,0 +1,75 @@
+conso=read.table(file = file.choose(),sep=';',header=T,row.names = 1)
+conso
+conso_sup=conso[8:18,27:30]
+conso_sup
+#tranches d'age et de d1 vers d10 et ensemble represente la tranche d'age 
+#moyenne pour toute la france
+#depense totaux , rubriques
+#n individus n variable et quali quanti
+#caractériser les tranche d age avec les différents ribrique
+#ensemble:redandance d'inforamtion
+library(FactoMineR)
+res.pca=PCA(conso,ind.sup=8:18,quanti.sup=27:30)
+res.pca$eig
+#pour obtenir une typologie des classes d'age fondée sur leurs dépenses on 
+#définit la distance entre deux classes d'age uniquement sur la base de leurs 
+#depenses dans les différentes rubriques ainsi les autres rubriques qui 
+#correspondent a des totaux ne sont pas des variables actifs mais considérers
+#comme étant des variables supplémentaires
+#ques5:les deux premiers axes represente environs 93% de l'inertie totale
+#,en d'autre terme 93% de la variabilité totale du nuage des individus ou des
+#variables est représenté par le premiers plan factoriel
+#ques6:
+barplot(res.pca$eig[,1])
+#quest7:
+plot.PCA(res.pca,choix='ind',invisible="ind.sup")
+#corelation variable
+#individu proche ou nn
+#premier axe oposoe les tranches d'ages ectreme et tranche d'ages moyenne
+#l'axe 2 range les tranches d'ages de la plus haute à la plus basse
+#c-
+res.pca$ind
+#plus et moins représente
+#plus ou moins contribué
+#cos mteha akal haja =>mal projeté
+#8) c.
+ #les deux variables ne sont pas corrélé restaurent et logement car 
+ #perpondiculaire
+#matrice de correlation
+round(cor(conso[,c(1,4,17)]),2)
+#☻pratiquement logement eau gaz ortogonale avec les autres variables 
+#fromage ..
+#g- 
+plot.PCA()
+#premier axe
+#coff de correlation 0.99 on peut nommer la premiere composant comme axe
+#  de variabilité de consomm produit alimentaire
+plot.PCA(res.pca,choix="ind",invisible = "ind")
+#ceux qui ont un revenue tres important consomme beaucoup
+#ensemble posséde un profil de consommation moyen
+#9: premier axe:il oppose les tranches d'age qui deponse beaucoup avec 
+#celle qui deponse peu 
+#pour plus de detail cette premiere composante principale est surtt
+#liée au deponses alimentaire ceux qui est bien résumé par la forte correlation
+#de la variable supp totale alimentation avec le premier axe(coff de 
+#correaltion 0.99)
+#rappelons aussi que la premiere composante proncipale est la combinaison 
+#linéaire de l'ensemble des variables qui la synthétise le mieux
+#2eme axe: opose principalement les dépences de fruit huile poisson et 
+#santé avec logement eau gaz electricité , tabac ,communication,restauration,
+#cet axe sépare globalement les classes d'age quyi dépense pe(classe d'age
+#extreme) les moins de 25 ans dépence plus en communication, restauration , tabac,(c
+#coordonnées positive sur l axe 2) et les personnes agés présente un profil de 
+#dépense opposé
+#les deux classes d'age extreme ont une faible corrdoné sur le premier axe et déponse globalement peu
+#enseigement trés mal représente on peut pas l'interpreter car elle est mal présenté
+plot.PCA(res.pca,choix='ind',axes=2:3)
+plot.PCA(res.pca,choix='var',axes=2:3)
+#enseigenemt : trés bien présenter
+#ceux les tranches d'age qui consomme beaucoup les etu moins de 25 et leurs parents
+#axe 3 est essenciellement liée a la variable ensignement et à moins degre a
+#la variable autre produit alimentaireil oppose principalement les tranches d'age
+#25-34 au tranche moins de 25 ans et 45-53 qui dépensent plus que les autres tranche
+#ensignement(etudiant et leurs parent)
+
+#♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥

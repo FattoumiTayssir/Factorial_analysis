@@ -1,0 +1,91 @@
+temperature=read.table(file=file.choose(),sep=';',header=T,row.names=1)
+temperature
+library(FactoMineR)
+#str : il s'agit d'une description des variables (quali/quanti)
+res.pca=PCA(temperature,ind.sup = 24:35,quanti.sup = 13:16,quali.sup = 17)
+res.pca
+#$ind ($coord,$cos2,$contrib,$cor) individus
+#$var:variable
+res.pca$eig #table de la variance:1)valeur propres,2)variance expliquée:
+#le pourcentage dinformation portée par le premier axe 3)variance cumulé
+#le premier e t le deuxieme axe resume 95% de l'information qui esxite dans
+#le jeu de données de depart donc on retient le premier plan
+plot.PCA(res.pca) #cercle de corrélation et graphe des individus
+plot.PCA(res.pca,choix='ind') #graphe des individus:indivdus supp ou bien 
+#actif:bleu (des indiv supp) et les autre actif
+plot.PCA(res.pca,choix='ind',invisible = 'ind.sup') #seulement les individus actif
+plot.PCA(res.pca,choix = 'var') #cercle de corrélation
+plot.PCA(res.pca,choix = 'ind',habillage = 17)
+#les carraeaux c'est les modalitées en calculant le baricentre et puis
+#le projeter avec la variable
+#indivi actif et supp :difference point m3ebya
+dimdesc(res.pca) #description rapide des axes
+#diff quanti et quali
+#dimension=axes=composant
+#test de student pour voir l effet de chaque modalité seul: $category
+#question 8
+res.pca$ind
+#9
+res.pca$ind.sup #tous sauf contributions
+sort(round(res.pca$ind$contrib[,1],2)) #2 pour deux chiffres aprés la 
+#virgule
+sort(round(res.pca$ind$contrib[,2],2))#2 pour deuxieme dimensions
+#somme des cos2
+sort(round(res.pca$ind$cos2[,1]+res.pca$ind$cos2[,2],3))
+#berlin la moins représenté et rome et reykjavik sont les meilleurs
+#diagonalisation et valeurs propres
+res.pca$var #qualite de la representation : cos2
+#cor et coord identique car c est les mémes coordonnées
+res.pca$quanti.sup
+#illustratif
+#categoriel qualitative
+res.pca$quali.sup
+#scale = true par defaut
+#les données sont déja centrées et réduites
+scale(temperature[1:23,1:16])
+cor(temperature[1:23,1:16]) #individus actif et variable quanti
+#question 20 et 21
+#pourcentage dinertie=variable explique
+#interprete premiere dimention puis dexieme
+#analyse conjointe avec cercle de correlation et graphe dindivue
+#La premiere composante principale est prédominante car elle résume pour elle
+#seule 82.9% de l'inertie totale'
+#toute les variables actifs sont du meme cotes de la premiere composante
+#principale donc meme signe de coefficient de corrélation qui est positif
+#correlation trés élévé entre les variables et l'axes car le cosinus est 
+#tres eleve
+#Avril septembre et octobre les plus corrélé
+#variable supp annuelle tres corrolé a la composante principale
+#les trois temp mensuelle 
+#nous nottons que les moins septembre , octobre et avril sont plus 
+#plus etroitement liées que les autres a cet premiere composante
+#ils representent les mieux la temperature anuelle car la variable 
+#annuelle est trés corrélé a cet axe
+#tres corréle forte mais negativement latitude 
+#la temprerature forte coté positif et vice vers ça
+#chaude avec faible attitude 
+#la variable illustratif lattitude est trés corrélé negativement à la premiere
+#composante(-0.98) ce qui signifie que les villes qui sont plus au sud ont 
+#une plus grande corrdonées sur cette composante et sont donc les villes les
+#plus chaude(correlation positif)
+#deuxieme composante(fou9 w louta) variance expliqué
+#la deuxieme composante est relativement importante car elle résume 15.4
+#de l'inertie totale
+#moins de variabilité que le premier axes donc moins corrélé
+#les mois d'hivers sont corrélé negativement et celle de l'ete positivement
+#amplitude thermique correle positivement 
+#les villes en haut posséde une amplitude thermique éleve
+#chaude pendent l'été et froide pendant l'hiver
+#l'autre coté louta:chaude pendant l hiver et froide pendant l'été
+#les temperatures peuvent étre résumé par deux variables synthétiques:
+#la temperature moyenne annuelle et l'amplitude thérmique
+#a partir de ces deux variables nous pouvons créer des typologies des villes
+#en réunissant les villes qui sont proche sur le plan factoriel et en respectant
+#l'emplacement géographique nous pouvons proppser la typologie suivante :
+#classe 1:ville d'europe miridional caracterrisé par une temperature éleve
+#tout au long de l'année
+#classe2:ville d europe occidentale caractérisé par des temperatures 
+#moyenne sur toute l'année
+#classe3:ville européene du nord caractérise par des temperatures froides 
+#en particulier pendant l'été
+#ville au milieu:temperature moyenne sur toute lannée(berlin,prague)

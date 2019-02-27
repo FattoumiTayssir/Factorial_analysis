@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1543690454196.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "936700570",
+    "id" : "A9DE704B",
+    "lastKnownWriteTime" : 1543675528,
+    "last_content_update" : 1543675528,
+    "path" : "C:/Users/lenovo/Downloads/Analyse-FactoTP2.R",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "38,0",
+        "scrollLine" : "24"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

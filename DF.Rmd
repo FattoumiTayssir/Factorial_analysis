@@ -1,0 +1,104 @@
+---
+title: "Atelier1"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+1.
+```{r}
+library("FactoMineR")
+	
+data(decathlon)
+head(decathlon)
+decathlon
+```
+2.
+#
+```{r}
+summary(decathlon)
+str(decathlon)
+```
+```{r}
+library("plyr")
+?ddply
+comp=ddply(decathlon,"Competition")
+comp
+```
+4.
+```{r}
+library("corrgram")
+round(cor(decathlon[, 1:12], use="pair"),2)
+
+```
+On peut detecter que la majorité des variables sont faiblement 2 à 2 corrélées 
+5.
+On a des variables quantitatives de différentes variances  et différentes unités  
+1.
+```{r}
+res <- PCA(decathlon, quanti.sup=11:12, quali.sup=13)
+```
+2.L'objectif de notre etude utilisant l'acp est de dterminer la typologie des athletes d'ou les 2 variables
+n'intervient pas dans ce contexte.
+3 et 4.
+l'inertie est trop distribué sur les dimensions on peut depasser 90% de l'inertie totale qu'aprés prendre
+7 dimensions en consideration
+```{r}
+res$eig
+```
+
+```{r}
+barplot(res$eig[,1],)
+
+```
+
+3.l'inertie des 2 1er representent 92% de l'inertie totale la courbe aussi  represente une cassure dés le 2éme 
+composant 
+5.
+```{r}
+res$ind$coord
+res$ind$cos
+res$ind$contrib
+```
+6.
+```{r}
+res$quanti.sup$cor
+res$quanti.sup$cos2
+```
+7.
+```{r}
+plot.PCA(res,choix = "ind",axes = 3:4)
+
+```
+8.
+```{r}
+plot(res, habillage = 13, col.hab=c("green","blue"))
+
+
+```
+9.
+```{r}
+plot.PCA(res,choix = "var",invisible = "var")
+```
+
+la variable Points  est bien decrit par le 1er composant ,mais Rank est moins représenté par cet axe 
+en faite Dim 1 oppose ces deux variables
+la variable point est trés corrélé à Dim1 on peut donc conclure que la 1ére variable synthetique represente Points
+10.
+```{r}
+library("ade4")
+res=dudi.pca (decathlon [, 1:11], scannf = FALSE, nf = 5)
+res
+```
+```{r}
+library("ggplot2")
+library("factoextra")
+res.pca <- PCA(decathlon [, 1:11], graph = FALSE)
+
+fviz_eig (res.pca) # Scree plot
+fviz_pca_ind (res.pca) # Graphique des individus
+fviz_pca_var (res.pca) # Graphique des variables
+#FACTOEXTRA a une reprentation graphique plus  avancée que fatomineR
+``
+

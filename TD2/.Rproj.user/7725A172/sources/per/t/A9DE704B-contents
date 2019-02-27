@@ -1,0 +1,162 @@
+install.packages("FactoMineR")
+library("FactoMineR")
+db=read.table(file=file.choose(),header=T,sep=";",dec=".",na.string="",row.names=1)
+db
+lesvariables supplimentaires (ilustrative) :	aide ? l'interpr?tation// on fait juste parfois une projection/ prjection dans un plan d?ja fait 
+les variables actives ( participer ? la construction au axes p// comment je peux savoir Quels sont les variables : tout d?pend du prob 
+ quanti/quali
+3/
+str(db)
+des variables quanti/quali .....
+4/
+avtif : les capital 
+quanti : temp?rature mensuelle : 
+res.pca=PCA(db,ind.sup=24:35,quanti.sup=13:16,quali.sup=17) 
+res.pca // sortie global ( information sur les individus+lesvariables)
+$ind : $coord : coordonn?e/$cor:corr?lation /$contrib :/$cor
+$ var :
+res.pca$eig // on peut savoir ici combien d'axes ? retenir 
+-> table de la variance 
+1er colonne  les valeur propres 
+2eme: variance expliqu? : pourcentage d'information port? par le 1er axe =l'ambda 1/somme des l'ambda
+3eme variance expliqu? cumu :pourcentat=ge d'inertie expliqu? par les deux axes =x1+x2/somme
+on retient juste le premier plan (98.89) 
+crit?re de coude : cassure en 2eme -< on retire les2 premiers axes 
+remarque :
+5/ la commande plot.pca :
+plot.PCA(res.pca) 
+cercle de corr?lation/graphe des individus 
+si on a just besoin de graph d'individu :
+plot.PCA(res.pca,choix="ind")
+
+plot.PCA(res.pca,choix="var")
+capitales : actif 
+non capital : non actif 
+bleu : supp 
+graph des individu actif :
+plot.PCA(res.pca,choix="ind",invisible="ind.sup")
+une sorte d'abiage :
+plot.PCA(res.pca,choix="ind",habillage=17)
+modalit? : par rapport au barycentre(projection du bary) : Aria selon la position g?ographique (4 modalit?s)
+6/
+cos2=permet de voir si l'individu est bien repr?sent? ou nn 
+-> bien projet? si cos2 >>>> -> individu >> bien projet? 
+janvier (exemple du cour : dim+dim2)
+contibution de l'individu dans la construction de l'axe : se mesure  avec contrib 
+plus la coordon?e est ?lev? plus la contribution est ?lev?
+les dimentions : les composantes :
+dimdesc :
+c'est une sorte de test anova 
+une pour ?tudier l'effet de area sur les coordon?es des individus 
+la mesure de l'effet area sur les autres variables 
+67 pourcent de la variabilit?s des coordonn?es des individus  sur la deuxi?me dimension .. (voir le cour )
+***********
+R^2=0.67 ->
+
+dimdesc(res.pca)
+// test anova 
+7/res.pca$eig
+-> on prend juste les 2 axes 
+8/
+res.pca$ind
+
+9/
+res.pca$ind.sup
+// ladiff?rence ici on n'apas de contribu car ces axes ne contribue pas dans la construction des axes 
+10/ [,1] : dim 1 // toutes les lignes et la 2eme colonne 
+2 round : 2 chiffres 
+sort(round(res.pca$ind$contri[,1],2))
+11/
+sort(round(res.pca$ind$contri[,2],2))
+12/
+sort(round(res.pca$ind$cos2[,1]+res.pca$ind$cos2[,2],3))
+13/
+14/
+les variables avtives :
+res.pca$var 
+15/ cos2=qualit? de repr?sentation (mal projet? / biens projet?)
+correlation 
+res.pca$var
+dim1=october
+dim2=june
+coord=cor=projection de la variable par rapport ? l'axe 
+16/
+supp juste pour lesinterpr?tations 
+res.pca$quanti.sup
+pas de contribution ici carsupp
+17/cat?gorielle= qualitative
+res.pca$quali.sup
+18/ les donn?es sont d?ja centr? r?duit :
+sinon on utilise la commande scale 
+
+1-> 23 les variables active 
+temperature[1:23,1:16] : ligne / colonne 
+19/
+seulement les actifs 
+on a ?limin?s les variables quali+ les variables supp
+cor(db[1:23,1:16])
+ou bien cor(db[,1:16])
+20 et 21/
+interpr?tation des axes :
+
+le premier axe :
+1/ par le pourcentage d'inertie 
+
+elle est pr?dominante : 
+-> la 1er comp principale est pr?dominante  car elle r?sume pour elle seule 82.90% de l'inertie total
+
+toutes les variables actives sont de meme cot? de la mem composantes principales(mem signe de coe de corr )
+les variables les plus corr?l?s : cos est tr?s ?leves ( c  normal carla 1er axe feha l'infola plus import
+*les moins avril sep et octobersont  plus  ?troitement li?s que les autres ? cet 1er composante -> on peut dire qu'il repr?sente mieux les temp annuals( car la variable annuel est tr?s corr?l ? cette axe )
+annual elle est tr?s corr?l? avec la 1er composante = je peux nomm? la 1er composante = temp annua
+****************************
+latitude : corr n?gativement = les villes de sud 
+faible latitude pour les individus quiont une coordon?e positive 
+** la variable illustrative latitude est tr?s corr?les n?gativement ? la 1er composante (-0.89:coeff de corr) ce qui signifie que
+les villes qui sont plus au sud (latitude inf) ont une grande cordonn?e sur cette composante et ils sont donc les villes les plus chaudes
+ //// la 2eme composante //////
+le poucentage de variale expliqu? 
+la 2eme composante est relativement importante car elle r?sume 15.4 de l'inertie total 
+cercle 
+les moins de l'?t? est corr positivement 
+les moins d'hiver sont corr n?gativement 
+ par rapport ? la variable amplitude :
+axe 2= amplitude thermique 
+les villes en haut sont chaude pendant l'?t? (une forte amplitude thermique )et froide pendant l'hiver 
+amplitude = diff?rence entre les temp?ratude 
+si une ville admet une amplitude tr?s grande -> ?t? tempirature tr?s ?leve / hiver tr?s faible
+
+
+
+composante 1= chaude et froide 
+2eme composante
+amplitude thermique ?lev? 
+amplitude thermique faible 
+
+************************
+une cr?ation de classification des individu ? partir de deux composantes :
+les villes qui se trou
+on peut dire que les temp?ratures peuvent etre r?sum?s par 2 variables synth?tiques:
+1/ **la temp?rature moyenne annuet l'amplitude thermique
+? partir de ces 2 variables nous pouvons cr?er des typologies des villes .on r?unisson les villes qui sont proche sur le plan factoriel 
+et on respectons l'emplacement g?ograp nous pouvons  propos? la topologies suivantes :
+1er gpe : villes d'europe m?ridional ( rome..) caract?ris? par une temp ?l?v? toute au long de l'ann?e 
+2/ les villes au milieu 
+**des temp?ratures moyennes toute au long de l'ann?e 
+**ville d'europe auxidental caract?ris? par des temps moyennes sur toutes l'ann?e
+3/ les villes froides : les villes d'europe de nord 
+caract?ris? par des temp?ratures froides en particulier pendant l'?t? 
+
+variable supp 
+
+puis une analyse conjointes : graphe +
+r?sum? les varriables 
+le noms des composantes/variable synth?tique 
+
+
+
+
+
+
+
+

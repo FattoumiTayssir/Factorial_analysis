@@ -1,0 +1,92 @@
+db=read.table(file=file.choose(),header=T,sep=";",dec=".",na.string="",row.names=1)
+db
+
+library("FactoMineR")
+// ensemble : repr?sente la tranche d'age moyenne en france 
+3/
+tranche d'age en fct des diff rubriques -> typologie suivant l'age // variable age : active 
+les variables qui d?crives les rubriques de conso supp
+ensemple =variable supp car qu'il a une redonance d'informat 
+res.pca=PCA(db,ind.sup=8:18,quanti.sup=27:30) // ici ensemple 
+res.pca$eig
+
+casure :17/10-> 1
+comm:
+pour obtenir une typologie des classes d'age fond? sur leur d?pense on d?finie la distance entre deux classes d'age 
+uniquement sur la base de la base de leur d?pense dans les diff?rentes rubriques ainsi les autres rubriques qui correspondent
+? des totaux ne sont pas des variables actives mais supp
+4/
+5/
+les deux premiers axes exprimes environs 93% de l'inertie total en d'autres termes 93% de la variabilit?s total du nuage des individus
+ou des variables est repr?sent? par le 1er plan factoriel
+6/
+barplot(res.pca$eig[,1],col=2)
+-> on prend les 2 premiers axes 
+la 1er colone de la sortie eig 
+7/ 
+plot.PCA(res.pca,choix="ind",invisible="ind.sup")
+par rapport au 1er axe
+oppose les tranches d'age extreme  au tranche  moyenne 
+
+la 2eme composante : organisationdes tranches d'age
+**l'axe 2 range les tranche d'ages de la plus haut ? la plus basse
+***
+
+c/
+plot.PCA(res.pca,choix="ind")
+res.PCA$ind
+sort(round(res.pca$ind$cos2[,1]+res.pca$ind$cos2[,1],2))
+Q8: cercle de corr?
+plot.PCA(res.pca,choix="var",invisible="quanti.sup")
+commentaire :
+toutes les variables sont positivement corr? avec la premierecomposante sauf 
+les individu qui consomme beaucoup : les tranches d'age moyenne
+d/
+somme de cos 2 le plus faire =la variable la mal repr?sent? 
+
+sort(round(res.pca$var$cos2[,1]+res.pca$var$cos2[,2],3))
+a9al cos hia variable mal repr?sent? 
+on peut pas interpr?t? une variable mal repr?sent?
+e/
+sort(round(res.pca$var$contrib[,1]+res.pca$var$contrib[,2],2))
+sort(round(res.pca$var$contrib[,2],2))
+je peux nomm? la variable synth?tiq = logement eau gaz 
+
+les deux variables : restaurants et logement_eau_gaz electricit? ne sont pas presque cor?? (perpo)
+matrice de corr?lation :
+round(cor(db[,c(1,4,17)]),2)
+g/
+les variables suppl?mentaires
+plot.PCA(res.pca,choix="var",invisible="var")
+variable total alimentation est tr?s corr? avecla 1er axe , l'axe peut etre synth?tis? avec cette var
+pour voir la corr?lation:
+(remarque pour lesvariables actifs :res.pca$var$cor
+res.pca$quanti.sup$cor
+
+graph des individus suppl?mentaires :
+plot.PCA(res.pca,choix="ind",invisible="ind")
+les d?ciles sont ordonn?es (ce qui ont des revenues important cosomm  bcq )
+l'indiidu ensemble : il s'agit d'une tranche d'age moyenne 
+-> poss?de un profil moyen 
+lesindividus proche ? l'origine ont un profil de d?pense qui est moyen 
+9/
+
+le 1er axe :
+il oppose les tranches d'ages qui d?penses bcq avec celle qui d?pense peu pour plus de d?tails cette 1ere composantes principales
+est surtout li?es au d?penses alimentaires ce qui est bien r?sum?s parla forte corr?lation 
+de la variable supplimentaire total alimentation avec le 1er axe ( on a trouver le coieff de corr 0.99 )
+rappelons aussi que la 1er composantes principales est la combinaison lin?aires de l'emsemble des variables qui l'a synth?tise le mieux 
+le 2eme axe :
+oppose principalement les d?penses de fruit, huile , poissons et sant? avec logement , eau_gaz_electricit? , tabac,communication, restauration
+cette axe s?pare globalement les classes d'age qui d?pense peu (se sont les classes d'age extr?me)
+lesmoins de 25 ans consommeplus en restauration , tabac 
+d?pense plus en consommation (cordonn?es positives sur l'axe 2) et
+les personnes ag?e pr?sente un profil de d?pense oppos? 
+(les 2 classes d'age extr?mes .............)
+
+partie : enrichir l'interpr?tation :
+plot.PCA(res.pca,choix="ind",axes=2:3)
+plot.PCA(res.pca,choix="var",axes=2:3)
+l'axe 3 est essentiellement li?es ? la variable enseignement et ? moins d?gr? ? la variable autre produit alimentaire 
+il oppose principalement les tranches d'age 25-34 au tranche moins de 25 et 45-54 qui d?pense plus sue les autres tranches en enseignement(?tudiants et leurs parents )
+
